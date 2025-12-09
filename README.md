@@ -2,7 +2,7 @@
 
 **Course:** Telecommunication I (IUST)  
 **Semester:** 402-2  
-**Student:** Seyed Alireza Mirabedini (401414024)
+**Student:** Seyed Alireza Mirabedini
 
 ## 📋 Table of Contents
 
