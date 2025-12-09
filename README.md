@@ -44,8 +44,8 @@ This project investigates the effects of noise, phase shift, and filtering on au
 ├── Det_032.wav, Det_100.wav, Det_150.wav # AM detector outputs (before filter)
 ├── Det_F_032.wav, Det_F_100.wav, Det_F_150.wav # AM detector outputs (after filter)
 ├── Channel.wav                         # Phase compensated signal
-├── Channel_Filterd.wav                # Filtered before phase compensation
-├── Channel_After_Filterd.wav          # Filtered after phase compensation
+├── Channel_Filtered.wav               # Filtered before phase compensation
+├── Channel_After_Filtered.wav         # Filtered after phase compensation
 ├── shifted_audio.wav                  # Phase-shifted audio
 ├── shifted_audio_with_noise.wav       # Phase-shifted audio with noise
 ├── Compare_1.png, Compare_2.png       # Comparison plots
@@ -127,18 +127,18 @@ Two filtering approaches are compared:
 #### 1. Filtering Before Phase Compensation
 
 ```matlab
-Filterd = lowpass(ifft(signal_ft_WithNoise), 16000, 44100);
-Filterd_ft = fft(Filterd, nfft);
-Filterd_channel = Filterd_ft .* exp(-4i*pi/9);
-audiowrite('Channel_Filterd.wav', real(ifft(Filterd_channel)), message.fs);
+Filtered = lowpass(ifft(signal_ft_WithNoise), 16000, 44100);
+Filtered_ft = fft(Filtered, nfft);
+Filtered_channel = Filtered_ft .* exp(-4i*pi/9);
+audiowrite('Channel_Filtered.wav', real(ifft(Filtered_channel)), message.fs);
 ```
 
 #### 2. Filtering After Phase Compensation
 
 ```matlab
-Filterd_After = lowpass(real(ifft(channel_ft)), 16000, 44100);
-Filterd_After_ft = fft(Filterd_After, nfft);
-audiowrite('Channel_After_Filterd.wav', real(ifft(Filterd_channel)), message.fs);
+Filtered_After = lowpass(real(ifft(channel_ft)), 16000, 44100);
+Filtered_After_ft = fft(Filtered_After, nfft);
+audiowrite('Channel_After_Filtered.wav', real(ifft(Filtered_After_ft)), message.fs);
 ```
 
 **Observation:** Analysis shows that the first 16 kHz is the most important frequency range. Filtering before phase compensation produces better results with reduced noise.
